@@ -17,6 +17,7 @@ export interface DartBoardValue {
     value: number,
     displayName: string,
     baseColor: DartBoardColor,
+    selected?: boolean;
 }
 
 @Component({
@@ -32,6 +33,5 @@ export class DartBoardSegmentComponent{
 
     selectValue(value: DartBoardValue){
         this.onValueSelected.emit(value);
-        console.log(`value selected: ${value.value}`)
     }
 }

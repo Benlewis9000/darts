@@ -1,0 +1,6 @@
+<app-page-layout>
+    <p>Dartboard</p>
+    @for (segment of segments; track $index){
+        <app-dart-board-segment [segment]="segment"></app-dart-board-segment>
+    }
+</app-page-layout>

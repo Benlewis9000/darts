@@ -1,5 +1,5 @@
 <div class="dart-board-segment">
-    @for(value of segment.values; track $index){
+    @for(value of segment; track $index){
         <button class="dart-board-value" (click)="selectValue(value)" [disabled]="value.selected">{{value.displayName}}</button>
     }
 </div>

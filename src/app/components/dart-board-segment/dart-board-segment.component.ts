@@ -1,24 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-
-export type DartBoardColor = 'light' | 'dark' | 'red' | 'green'
-
-export const dartBoardColors = {
-    light: '$color-timberwolf',
-    dark: '$color-gray-dark',
-    red: '$color-rust',
-    green: '$color-green',
-}
-
-export interface DartBoardSegment{
-    values: DartBoardValue[],
-}
-
-export interface DartBoardValue {
-    value: number,
-    displayName: string,
-    baseColor: DartBoardColor,
-    selected?: boolean;
-}
+import { DartBoardColor, DartBoardSegment, DartBoardValue } from "../../model/dart-board";
 
 @Component({
     selector: 'app-dart-board-segment',
@@ -35,3 +16,5 @@ export class DartBoardSegmentComponent{
         this.onValueSelected.emit(value);
     }
 }
+
+export { DartBoardValue, DartBoardSegment };

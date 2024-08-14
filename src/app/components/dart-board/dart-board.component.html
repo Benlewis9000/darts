@@ -1,6 +1,0 @@
-<app-page-layout>
-    <p>Dartboard</p>
-    @for (segment of dartboard.values(); track $index){
-        <app-dart-board-segment [segment]="segment" (onValueSelected)="selectValue($event)"></app-dart-board-segment>
-    }
-</app-page-layout>

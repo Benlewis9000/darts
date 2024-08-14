@@ -7,14 +7,18 @@ export const dartBoardColors = {
     green: '$color-green',
 }
 
-export type DartBoard = Map<number, DartBoardSegment>
+export type DartBoard = Map<number, DartBoardSlice>
 
-export type DartBoardSegment = DartBoardValue[]
+export type DartBoardSlice = DartBoardSegment[]
+
+export interface DartBoardSegment {
+    value: DartBoardValue,
+    displayName: string,
+    baseColor?: DartBoardColor,
+    selected?: boolean;
+}
 
 export interface DartBoardValue {
     baseValue: number,
     multiplier: number,
-    displayName: string,
-    baseColor?: DartBoardColor,
-    selected?: boolean;
 }

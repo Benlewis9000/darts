@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { DartBoardSegment } from "../components/dart-board-segment/dart-board-segment.component";
-import { DartBoard } from "../model/dart-board";
+import { DartBoard, DartBoardSlice } from "../model/dart-board";
 
 const dartBoardRange = 20;
 
@@ -9,12 +8,14 @@ const dartBoardRange = 20;
 })
 export class DartBoardSegmentService{
     generateDartboard(): DartBoard {
-        const segments = new Map<number, DartBoardSegment>();
+        const slices = new Map<number, DartBoardSlice>();
 
         // Missed value
-        segments.set(0, [{
-            baseValue: 0,
-            multiplier: 1,
+        slices.set(0, [{
+            value: {
+                baseValue: 0,
+                multiplier: 1,
+            },
             displayName: 'MISSED',
             baseColor: 'dark',
         }]);
@@ -23,22 +24,28 @@ export class DartBoardSegmentService{
         for (let i = 1; i <= dartBoardRange; i++){
             const baseColor = i % 2 == 0 ? 'dark' : 'light';
             const multiplierColor = i % 2 == 0 ? 'red' : 'green';
-            segments.set(i, [
+            slices.set(i, [
                 {
-                    baseValue: i,
-                    multiplier: 1,
+                    value: {
+                        baseValue: i,
+                        multiplier: 1,
+                    },
                     displayName: i.toString(),
                     baseColor: baseColor, 
                 },
                 {
-                    baseValue: i,
-                    multiplier: 2,
+                    value: {
+                        baseValue: i,
+                        multiplier: 2,
+                    },
                     displayName: 'x2',
                     baseColor: multiplierColor, 
                 },
                 {
-                    baseValue: i,
-                    multiplier: 3,
+                    value: {
+                        baseValue: i,
+                        multiplier: 3,
+                    },
                     displayName: 'x3',
                     baseColor: multiplierColor, 
                 }
@@ -46,21 +53,25 @@ export class DartBoardSegmentService{
         }
 
         // Outer and inner bullseye
-        segments.set(25, [
+        slices.set(25, [
             {
-                baseValue: 25,
-                multiplier: 1,
+                value: {
+                    baseValue: 25,
+                    multiplier: 1,
+                },
                 displayName: 'OUTER BULL',
                 baseColor: 'green',
             },
             {
-                baseValue: 25,
-                multiplier: 2,
+                value: {
+                    baseValue: 25,
+                    multiplier: 2,
+                },
                 displayName: 'INNER BULL',
                 baseColor: 'red',
             },
         ]);
         
-        return segments;
+        return slices;
     }
 }

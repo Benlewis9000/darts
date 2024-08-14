@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { PageLayoutComponent } from "../page-layout/page-layout.component";
-import { DartBoardSegment, DartBoardSegmentComponent, DartBoardValue } from "../dart-board-segment/dart-board-segment.component";
 import { DartBoardSegmentService } from "../../services/dart-board-segment.service";
-import { DartBoard } from "../../model/dart-board";
+import { DartBoard, DartBoardSegment, DartBoardValue } from "../../model/dart-board";
+import { DartBoardSegmentComponent } from "../dart-board-segment/dart-board-segment.component";
 
 @Component({
     selector: 'app-dart-board',
@@ -11,7 +11,7 @@ import { DartBoard } from "../../model/dart-board";
     imports: [PageLayoutComponent, DartBoardSegmentComponent]
 })
 export class DartBoardComponent{
-    selectedValue?: DartBoardValue;
+    selectedValue?: DartBoardSegment;
 
     readonly dartboard: DartBoard;
 
@@ -19,7 +19,7 @@ export class DartBoardComponent{
         this.dartboard = dartBoardSegmentService.generateDartboard();
     }
 
-    selectValue(newValue: DartBoardValue){
+    selectValue(newValue: DartBoardSegment){
         if (this.selectedValue){
             this.selectedValue.selected = false;
         }

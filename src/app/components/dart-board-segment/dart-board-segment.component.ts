@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { DartBoardColor, DartBoardSegment, DartBoardValue } from "../../model/dart-board";
+import { DartBoardSlice, DartBoardSegment } from "../../model/dart-board";
 
 @Component({
     selector: 'app-dart-board-segment',
@@ -8,13 +8,11 @@ import { DartBoardColor, DartBoardSegment, DartBoardValue } from "../../model/da
     standalone: true
 })
 export class DartBoardSegmentComponent{
-    @Input({required: true}) segment!: DartBoardSegment;
+    @Input({required: true}) segment!: DartBoardSlice;
 
-    @Output() onValueSelected = new EventEmitter<DartBoardValue>();
+    @Output() onValueSelected = new EventEmitter<DartBoardSegment>();
 
-    selectValue(value: DartBoardValue){
+    selectValue(value: DartBoardSegment){
         this.onValueSelected.emit(value);
     }
 }
-
-export { DartBoardValue, DartBoardSegment };

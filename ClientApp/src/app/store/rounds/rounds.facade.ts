@@ -1,31 +1,35 @@
-import { Inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { setCurrentRoundNumber, setCurrentThrow } from './rounds.actions';
-import { Round, RoundThrow } from '../../model/round';
-import { DartBoardSegment } from '../../model/dart-board';
-import { selectCurrentRoundNumber } from './rounds.selector';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { RoundThrow } from '../../model/round';
+import { DartBoardValue } from '../../model/dart-board';
 import { Store } from '@ngrx/store';
+import { RoundsState } from './rounds.reducer';
+
+import * as selectors from './rounds.selector';
+import * as actions from './rounds.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoundsFacade {
-  store = Inject(Store);
+  constructor(private readonly store: Store<RoundsState>) {}
 
   setCurrentRound(activeRound: number) {
-    // TODO
+    this.store.dispatch(
+      actions.setCurrentRoundNumber({ currentRoundNumber: activeRound })
+    );
   }
   setActiveThrow(activeThrow: RoundThrow) {
-    // TODO
+    this.store.dispatch(actions.setCurrentThrow({ currentThrow: activeThrow }));
   }
 
-  get currentRoundNumber() {
-    return this.store.selectCurrentRoundNumber();
+  get currentRoundNumber$(): Observable<number> {
+    return this.store.select(selectors.selectCurrentRoundNumber);
   }
   get currentThrow(): Observable<number> {
-    return of(0);
+    return this.store.select(selectors.selectCurrentThrow);
   }
-  get currentValue(): Observable<DartBoardSegment | undefined> {
-    return of(undefined);
+  get currentValue(): Observable<DartBoardValue | undefined> {
+    return this.store.select(selectors.selectCurrentValue);
   }
 }

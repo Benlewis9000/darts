@@ -4,6 +4,7 @@
   "tasks": [
     {
       "type": "npm",
+      "path": "ClientApp",
       "script": "start",
       "isBackground": true,
       "problemMatcher": {

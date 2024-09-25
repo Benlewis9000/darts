@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RoundThrow } from '../../model/round';
-import { DartBoardValue } from '../../model/dart-board';
+import { DartboardValue } from '../../model/dartboard';
 import { Store } from '@ngrx/store';
 import { RoundsState } from './rounds.reducer';
 
@@ -29,7 +29,7 @@ export class RoundsFacade {
   get currentThrow(): Observable<number> {
     return this.store.select(selectors.selectCurrentThrow);
   }
-  get currentValue(): Observable<DartBoardValue | undefined> {
+  get currentValue(): Observable<DartboardValue | undefined> {
     return this.store.select(selectors.selectCurrentValue);
   }
 }

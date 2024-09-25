@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { DartBoardComponent } from './components/dart-board/dart-board.component';
+import { DartboardComponent } from './components/dartboard/dartboard.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'darts',
-        pathMatch: 'full'
-    },
-    {
-        path: 'darts',
-        component: DartBoardComponent,
-    }
+  {
+    path: '',
+    redirectTo: 'darts',
+    pathMatch: 'full',
+  },
+  {
+    path: 'darts',
+    component: DartboardComponent,
+  },
 ];

@@ -1,0 +1,5 @@
+<div class="dartboard-segment">
+    @for(value of segment; track $index){
+        <button class="dartboard-value" (click)="selectValue(value)" [disabled]="value.selected">{{value.displayName}}</button>
+    }
+</div>

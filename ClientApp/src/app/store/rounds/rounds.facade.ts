@@ -15,16 +15,14 @@ export class RoundsFacade {
   constructor(private readonly store: Store<RoundsState>) {}
 
   setCurrentRound(activeRound: number) {
-    this.store.dispatch(
-      actions.setCurrentRoundNumber({ currentRoundNumber: activeRound })
-    );
+    this.store.dispatch(actions.setCurrentRound({ currentRound: activeRound }));
   }
   setActiveThrow(activeThrow: RoundThrow) {
     this.store.dispatch(actions.setCurrentThrow({ currentThrow: activeThrow }));
   }
 
-  get currentRoundNumber$(): Observable<number> {
-    return this.store.select(selectors.selectCurrentRoundNumber);
+  get currentRound$(): Observable<number> {
+    return this.store.select(selectors.selectCurrentRound);
   }
   get currentThrow(): Observable<number> {
     return this.store.select(selectors.selectCurrentThrow);

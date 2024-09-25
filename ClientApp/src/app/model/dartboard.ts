@@ -14,7 +14,7 @@ export type DartboardSlice = DartboardSegment[];
 export interface DartboardSegment {
   value: DartboardValue;
   displayName: string;
-  baseColor?: DartboardColor;
+  baseColor: DartboardColor;
   selected?: boolean;
 }
 

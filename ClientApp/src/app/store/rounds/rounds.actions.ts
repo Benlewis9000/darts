@@ -2,9 +2,9 @@ import { createAction, props } from '@ngrx/store';
 import { RoundThrow } from '../../model/round';
 import { DartboardValue } from '../../model/dartboard';
 
-export const setCurrentRoundNumber = createAction(
+export const setCurrentRound = createAction(
   '[Rounds] Current round number set',
-  props<{ currentRoundNumber: number }>()
+  props<{ currentRound: number }>()
 );
 export const setCurrentThrow = createAction(
   '[Rounds] Current throw set',

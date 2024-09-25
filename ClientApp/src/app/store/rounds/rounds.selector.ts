@@ -4,9 +4,9 @@ import { RoundsState } from './rounds.reducer';
 
 const selectState = (state: RoundsState) => state;
 
-export const selectCurrentRoundNumber = createSelector(
+export const selectCurrentRound = createSelector(
   selectState,
-  (state: RoundsState) => state.currentRoundNumber
+  (state: RoundsState) => state.currentRound
 );
 export const selectCurrentThrow = createSelector(
   selectState,
@@ -14,10 +14,10 @@ export const selectCurrentThrow = createSelector(
 );
 export const selectCurrentValue = createSelector(
   selectState,
-  selectCurrentRoundNumber,
+  selectCurrentRound,
   selectCurrentThrow,
-  (state: RoundsState, currentRoundNumber: number, currentThrow: RoundThrow) =>
-    state.values[currentRoundNumber][currentThrow]
+  (state: RoundsState, currentRound: number, currentThrow: RoundThrow) =>
+    state.values[currentRound][currentThrow]
 );
 
 // TODO

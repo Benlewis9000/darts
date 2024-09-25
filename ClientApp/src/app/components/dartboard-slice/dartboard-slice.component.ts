@@ -2,13 +2,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DartboardSlice, DartboardSegment } from '../../model/dartboard';
 
 @Component({
-  selector: 'app-dartboard-segment',
-  templateUrl: 'dartboard-segment.component.html',
-  styleUrls: ['dartboard-segment.component.scss'],
+  selector: 'app-dartboard-slice',
+  templateUrl: 'dartboard-slice.component.html',
+  styleUrls: ['dartboard-slice.component.scss'],
   standalone: true,
 })
-export class DartboardSegmentComponent {
-  @Input({ required: true }) segment!: DartboardSlice;
+export class DartboardSliceComponent {
+  @Input({ required: true }) slice!: DartboardSlice;
 
   @Output() onValueSelected = new EventEmitter<DartboardSegment>();
 

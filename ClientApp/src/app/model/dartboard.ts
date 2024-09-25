@@ -7,9 +7,13 @@ export const dartboardColors = {
   green: '$color-green',
 };
 
-export type Dartboard = Map<number, DartboardSlice>;
+export interface Dartboard {
+  slices: Map<number, DartboardSlice>;
+}
 
-export type DartboardSlice = DartboardSegment[];
+export interface DartboardSlice {
+  segments: DartboardSegment[];
+}
 
 export interface DartboardSegment {
   value: DartboardValue;

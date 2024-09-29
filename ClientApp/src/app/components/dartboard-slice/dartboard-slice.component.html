@@ -1,5 +1,5 @@
 <div class="dartboard-segment">
     @for(segment of slice.segments; track $index){
-        <button class="dartboard-segment" (click)="selectValue(segment)" [disabled]="segment.selected">{{segment.displayName}}</button>
+        <app-dartboard-segment [segment]="segment" (onValueSelected)="selectValue(segment)"></app-dartboard-segment>
     }
 </div>

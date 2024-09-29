@@ -24,10 +24,10 @@ export class RoundsFacade {
   get currentRound$(): Observable<number> {
     return this.store.select(selectors.selectCurrentRound);
   }
-  get currentThrow(): Observable<number> {
+  get currentThrow$(): Observable<number> {
     return this.store.select(selectors.selectCurrentThrow);
   }
-  get currentValue(): Observable<DartboardValue | undefined> {
+  get currentValue$(): Observable<DartboardValue | undefined> {
     return this.store.select(selectors.selectCurrentValue);
   }
 }

@@ -1,10 +1,10 @@
 export type DartboardColor = 'light' | 'dark' | 'red' | 'green';
 
-export const dartboardColors = {
-  light: '$color-timberwolf',
-  dark: '$color-gray-dark',
-  red: '$color-rust',
-  green: '$color-green',
+export const DARTBOARD_COLORS = {
+  light: '--color-timberwolf',
+  dark: '--color-gray-dark',
+  red: '--color-rust',
+  green: '--color-green',
 };
 
 export interface Dartboard {

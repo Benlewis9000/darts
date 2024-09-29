@@ -15,8 +15,8 @@ export class DartboardComponent {
 
   readonly dartboard: Dartboard;
 
-  constructor(readonly dartboardSegmentService: DartboardFactory) {
-    this.dartboard = dartboardSegmentService.createDartboard();
+  constructor(readonly dartboardFactory: DartboardFactory) {
+    this.dartboard = dartboardFactory.createDartboard();
   }
 
   selectValue(newValue: DartboardSegment) {

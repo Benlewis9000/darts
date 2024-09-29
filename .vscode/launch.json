@@ -3,19 +3,26 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ng serve",
+      "name": "Launch App and debug",
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
       "url": "http://localhost:4200/#",
-      "webRoot": "${workspaceFolder}",
+      "webRoot": "${workspaceFolder}/ClientApp",
     },
     {
-      "name": "ng test",
+      "name": "Launch Karma and debug",
       "type": "chrome",
-      "request": "launch",
+      "request": "attach",
       "preLaunchTask": "npm: test",
-      "url": "http://localhost:9876/debug.html"
+      "address": "localhost",
+      "sourceMaps": true,
+      "webRoot": "${workspaceFolder}/ClientApp",
+      "port": 9333,
+      "pathMapping": {
+          "/": "${workspaceRoot}/ClientApp",
+          "/base/": "${workspaceRoot}/ClientApp"
+      }
     },
   ]
 }

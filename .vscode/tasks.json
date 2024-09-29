@@ -23,6 +23,7 @@
     },
     {
       "type": "npm",
+      "path": "ClientApp",
       "script": "test",
       "isBackground": true,
       "problemMatcher": {

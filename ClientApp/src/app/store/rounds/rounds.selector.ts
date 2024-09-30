@@ -1,23 +1,27 @@
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { RoundThrow } from '../../model/round';
 import { RoundsState } from './rounds.reducer';
 
-const selectState = (state: RoundsState) => state;
+const selectRoundsState = createFeatureSelector<RoundsState>('rounds');
 
 export const selectCurrentRound = createSelector(
-  selectState,
+  selectRoundsState,
   (state: RoundsState) => state.currentRound
 );
 export const selectCurrentThrow = createSelector(
-  selectState,
+  selectRoundsState,
   (state: RoundsState) => state.currentThrow
 );
 export const selectCurrentValue = createSelector(
-  selectState,
+  selectRoundsState,
   selectCurrentRound,
   selectCurrentThrow,
-  (state: RoundsState, currentRound: number, currentThrow: RoundThrow) =>
-    state.values[currentRound][currentThrow]
+  (state: RoundsState, currentRound: number, currentThrow: RoundThrow) => {
+    if (!state.values[currentRound - 1]) {
+      return undefined;
+    }
+    return state.values[currentRound - 1][currentThrow];
+  }
 );
 
 // TODO

@@ -1,6 +1,7 @@
 <app-page-layout>
     <p>Dartboard</p>
     @for (slice of dartboard.slices.values(); track $index){
-        <app-dartboard-slice [slice]="slice" (onValueSelected)="selectValue($event)"></app-dartboard-slice>
+        <app-dartboard-slice [slice]="slice"></app-dartboard-slice>
     }
+    <p>Selected value: {{ selectedValue$ | async }}</p>
 </app-page-layout>

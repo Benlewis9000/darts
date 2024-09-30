@@ -1,5 +1,5 @@
 <div class="dartboard-segment">
     @for(segment of slice.segments; track $index){
-        <app-dartboard-segment [segment]="segment" (onValueSelected)="selectValue(segment)"></app-dartboard-segment>
+        <app-dartboard-segment [segment]="segment"></app-dartboard-segment>
     }
 </div>

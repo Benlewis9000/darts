@@ -11,10 +11,4 @@ import { DartboardSegmentComponent } from '../dartboard-segment/dartboard-segmen
 })
 export class DartboardSliceComponent {
   @Input({ required: true }) slice!: DartboardSlice;
-
-  @Output() onValueSelected = new EventEmitter<DartboardSegment>();
-
-  selectValue(value: DartboardSegment) {
-    this.onValueSelected.emit(value);
-  }
 }

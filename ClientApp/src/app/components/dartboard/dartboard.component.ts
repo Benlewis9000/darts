@@ -1,29 +1,30 @@
 import { Component } from '@angular/core';
 import { PageLayoutComponent } from '../page-layout/page-layout.component';
 import { DartboardFactory } from '../../services/dartboard-factory.service';
-import { Dartboard, DartboardSegment } from '../../model/dartboard';
+import { Dartboard } from '../../model/dartboard';
 import { DartboardSliceComponent } from '../dartboard-slice/dartboard-slice.component';
+import { RoundsFacade } from '../../store/rounds/rounds.facade';
+import { AsyncPipe } from '@angular/common';
+import { distinctUntilChanged, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dartboard',
   templateUrl: 'dartboard.component.html',
   standalone: true,
-  imports: [PageLayoutComponent, DartboardSliceComponent],
+  imports: [PageLayoutComponent, DartboardSliceComponent, AsyncPipe],
 })
 export class DartboardComponent {
-  selectedValue?: DartboardSegment;
-
   readonly dartboard: Dartboard;
+  readonly selectedValue$: Observable<number>;
 
-  constructor(readonly dartboardFactory: DartboardFactory) {
+  constructor(
+    readonly dartboardFactory: DartboardFactory,
+    readonly roundsFacade: RoundsFacade
+  ) {
     this.dartboard = dartboardFactory.createDartboard();
-  }
-
-  selectValue(newValue: DartboardSegment) {
-    if (this.selectedValue) {
-      this.selectedValue.selected = false;
-    }
-    newValue.selected = true;
-    this.selectedValue = newValue;
+    this.selectedValue$ = roundsFacade.currentValue$.pipe(
+      distinctUntilChanged(),
+      map((value) => (value ? value.baseValue * value.multiplier : 0))
+    );
   }
 }

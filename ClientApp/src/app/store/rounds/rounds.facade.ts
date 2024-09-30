@@ -14,11 +14,14 @@ import * as actions from './rounds.actions';
 export class RoundsFacade {
   constructor(private readonly store: Store<RoundsState>) {}
 
-  setCurrentRound(activeRound: number) {
-    this.store.dispatch(actions.setCurrentRound({ currentRound: activeRound }));
+  setCurrentRound(currentRound: number) {
+    this.store.dispatch(actions.setCurrentRound({ currentRound }));
   }
-  setActiveThrow(activeThrow: RoundThrow) {
-    this.store.dispatch(actions.setCurrentThrow({ currentThrow: activeThrow }));
+  setCurrentThrow(currentThrow: RoundThrow) {
+    this.store.dispatch(actions.setCurrentThrow({ currentThrow }));
+  }
+  setSelectedValue(value: DartboardValue) {
+    this.store.dispatch(actions.setValue({ value }));
   }
 
   get currentRound$(): Observable<number> {

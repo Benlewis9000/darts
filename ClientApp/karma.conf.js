@@ -32,14 +32,15 @@ module.exports = function (config) {
         { type: 'text-summary' }
       ]
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress'],
     browsers: ['ChromeDebugging'],
     customLaunchers: {
       ChromeDebugging: {
-        base: 'Chrome',
+        base: 'ChromeHeadless',
         flags: [ '--remote-debugging-port=9333' ]
       }
     },
+    singleRun: false,
     restartOnFileChange: true
   });
 };

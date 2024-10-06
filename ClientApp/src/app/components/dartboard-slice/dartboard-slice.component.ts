@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DartboardSlice, DartboardSegment } from '../../model/dartboard';
+import { Component, Input } from '@angular/core';
+import { DartboardSlice } from '../../model/dartboard';
 import { DartboardSegmentComponent } from '../dartboard-segment/dartboard-segment.component';
 
 @Component({

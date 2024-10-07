@@ -10,6 +10,7 @@ import { distinctUntilChanged, map, Observable } from 'rxjs';
 @Component({
   selector: 'app-dartboard',
   templateUrl: 'dartboard.component.html',
+  styleUrls: ['dartboard.component.scss'],
   standalone: true,
   imports: [PageLayoutComponent, DartboardSliceComponent, AsyncPipe],
 })

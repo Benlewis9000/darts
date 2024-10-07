@@ -1,5 +1,5 @@
-<div class="dartboard-segment">
+<div class="dartboard-slice">
     @for(segment of slice.segments; track $index){
-        <app-dartboard-segment [segment]="segment"></app-dartboard-segment>
+        <app-dartboard-segment class="dartboard-segment" [segment]="segment" [ngClass]="{'base-value': segment.value.multiplier == 1, 'multiplier-value': slice.segments.length > 2 && segment.value.multiplier > 1}"></app-dartboard-segment>
     }
 </div>

@@ -12,6 +12,7 @@ import { RoundsFacade } from '../../store/rounds/rounds.facade';
   selector: 'app-dartboard-segment',
   templateUrl: 'dartboard-segment.component.html',
   styleUrls: ['dartboard-segment.component.scss'],
+  imports: [],
   standalone: true,
 })
 export class DartboardSegmentComponent implements AfterViewInit {

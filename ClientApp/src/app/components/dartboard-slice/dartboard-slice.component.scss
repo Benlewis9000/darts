@@ -1,0 +1,14 @@
+.dartboard-slice {
+  display: flex;
+  flex-direction: row;
+}
+
+.dartboard-segment {
+  height: 4vh;
+  flex: 1;
+}
+
+// Must go below dartboard-segment so flex size takes priority
+.multiplier-value {
+  flex: 0.5;
+}

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DartboardComponent } from './components/dartboard/dartboard.component';
+import { DartsPage as DartsPage } from './components/darts-page/darts-page.component';
 
 export const routes: Routes = [
   {
@@ -9,6 +9,6 @@ export const routes: Routes = [
   },
   {
     path: 'darts',
-    component: DartboardComponent,
+    component: DartsPage,
   },
 ];

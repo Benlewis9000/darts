@@ -1,1 +1,1 @@
-<button #segmentButton class="dartboard-segment-button" (click)="selectValue()" [disabled]="segment.selected">{{segment.displayName}}</button>
+<button class="dartboard-segment-button" [ngClass]="classes" (click)="selectSegment()" [disabled]="segment.selected">{{segment.displayName}}</button>

@@ -1,41 +1,43 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  ViewChild,
-} from '@angular/core';
-import { DARTBOARD_COLORS, DartboardSegment } from '../../model/dartboard';
+import { AfterContentInit, Component, Input } from '@angular/core';
+import { DartboardSegment } from '../../model/dartboard';
 import { RoundsFacade } from '../../store/rounds/rounds.facade';
+import { NgClass } from '@angular/common';
+import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-dartboard-segment',
   templateUrl: 'dartboard-segment.component.html',
   styleUrls: ['dartboard-segment.component.scss'],
-  imports: [],
+  imports: [NgClass],
   standalone: true,
 })
-export class DartboardSegmentComponent implements AfterViewInit {
+export class DartboardSegmentComponent implements AfterContentInit {
   @Input({ required: true }) segment!: DartboardSegment;
 
-  @ViewChild('segmentButton') segmentButton!: ElementRef;
+  readonly classes = new Set<string>();
 
   constructor(private readonly roundsFacade: RoundsFacade) {}
 
-  selectValue() {
+  selectSegment() {
     this.roundsFacade.setSelectedSegment(this.segment);
   }
 
-  ngAfterViewInit() {
-    this.segmentButton.nativeElement.style.backgroundColor = getComputedStyle(
-      document.documentElement
-    ).getPropertyValue(DARTBOARD_COLORS[this.segment.baseColor]);
-    this.segmentButton.nativeElement.style.color = getComputedStyle(
-      document.documentElement
-    ).getPropertyValue(
-      this.segment.baseColor == 'dark' || this.segment.baseColor == 'red'
-        ? DARTBOARD_COLORS['light']
-        : DARTBOARD_COLORS['dark']
-    );
+  toggleSelected() {
+    this.segment.selected = !this.segment.selected;
+    this.classes.has('selected')
+      ? this.classes.delete('selected')
+      : this.classes.add('selected');
+  }
+
+  ngAfterContentInit(): void {
+    this.roundsFacade.selectedSegmentId$
+      .pipe(distinctUntilChanged())
+      .subscribe((selectedId) => {
+        if (selectedId == this.segment.id || this.segment.selected) {
+          this.toggleSelected();
+        }
+      });
+
+    this.classes.add(this.segment.baseColor);
   }
 }

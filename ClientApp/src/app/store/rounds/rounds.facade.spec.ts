@@ -4,17 +4,36 @@ import { StoreModule } from '@ngrx/store';
 import { roundsReducer } from './rounds.reducer';
 import { RoundsFacade } from './rounds.facade';
 import { take, zip } from 'rxjs';
+import { DartboardSegment } from '../../model/dartboard';
+import { DartboardSegmentManager } from '../../services/dartboard-segment-manager.service';
+
+const basicValue = { baseValue: 20, multiplier: 3 };
+
+const basicSegment: DartboardSegment = {
+  id: 0,
+  value: basicValue,
+  displayName: '',
+  baseColor: 'light',
+  selected: false,
+};
 
 let facade: RoundsFacade;
 
 const configureServices = () => {
+  const segmentManagerMock = jasmine.createSpyObj<DartboardSegmentManager>([
+    'getSegment',
+  ]);
+  segmentManagerMock.getSegment.and.returnValue(basicSegment);
   TestBed.configureTestingModule({
     imports: [
       StoreModule.forRoot({
         rounds: roundsReducer,
       }),
     ],
-    providers: [RoundsFacade],
+    providers: [
+      RoundsFacade,
+      { provide: DartboardSegmentManager, useValue: segmentManagerMock },
+    ],
   }).compileComponents();
 
   facade = TestBed.inject(RoundsFacade);
@@ -60,22 +79,20 @@ describe('RoundsFacade', () => {
 
   describe('current value', () => {
     it('should output the new current value when set', (done) => {
-      const value = { baseValue: 20, multiplier: 3 };
-      facade.setSelectedValue(value);
+      facade.setSelectedSegment(basicSegment);
       facade.currentValue$.subscribe((currentValue) => {
-        expect(currentValue).to.equal(value);
+        expect(currentValue).to.equal(basicValue);
         done();
       });
     });
 
     it('should output the correct value for the correct selection', (done) => {
-      const value = { baseValue: 20, multiplier: 3 };
       facade.setCurrentRound(42);
       facade.setCurrentThrow(3);
-      facade.setSelectedValue(value);
+      facade.setSelectedSegment(basicSegment);
 
       facade.currentValue$.pipe(take(1)).subscribe((currentValue) => {
-        expect(currentValue).to.equal(value);
+        expect(currentValue).to.equal(basicValue);
         done();
       });
     });
@@ -84,7 +101,7 @@ describe('RoundsFacade', () => {
       const value = { baseValue: 20, multiplier: 3 };
       facade.setCurrentRound(42);
       facade.setCurrentThrow(3);
-      facade.setSelectedValue(value);
+      facade.setSelectedSegment(basicSegment);
       facade.setCurrentThrow(1);
 
       facade.currentValue$.pipe(take(1)).subscribe((currentValue) => {

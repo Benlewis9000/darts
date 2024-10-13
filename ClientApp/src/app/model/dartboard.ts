@@ -8,7 +8,7 @@ export const DARTBOARD_COLORS = {
 };
 
 export interface Dartboard {
-  slices: Map<number, DartboardSlice>;
+  slices: Map<number, DartboardSlice>; // TODO does this need ot be a map? are the keys ever used?
 }
 
 export interface DartboardSlice {
@@ -16,10 +16,11 @@ export interface DartboardSlice {
 }
 
 export interface DartboardSegment {
+  id: number;
   value: DartboardValue;
   displayName: string;
   baseColor: DartboardColor;
-  selected?: boolean;
+  selected: boolean;
 }
 
 export interface DartboardValue {

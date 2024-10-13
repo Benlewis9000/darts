@@ -22,8 +22,8 @@ export class DartboardSegmentComponent implements AfterViewInit {
 
   constructor(private readonly roundsFacade: RoundsFacade) {}
 
-  selectValue(value: DartboardSegment) {
-    this.roundsFacade.setSelectedValue(this.segment.value);
+  selectValue() {
+    this.roundsFacade.setSelectedSegment(this.segment);
   }
 
   ngAfterViewInit() {

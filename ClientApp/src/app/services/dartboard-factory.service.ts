@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Dartboard, DartboardSlice } from '../model/dartboard';
+import { DartboardSegmentManager } from './dartboard-segment-manager.service';
 
 const dartboardRange = 20;
 
@@ -7,6 +8,21 @@ const dartboardRange = 20;
   providedIn: 'root',
 })
 export class DartboardFactory {
+  // TODO protect this number better, can easily be changed accidentally
+  count: number = 0;
+
+  constructor(
+    private readonly dartboardSegmentManager: DartboardSegmentManager
+  ) {}
+
+  initSegmentDefaults = () => {
+    this.count++;
+    return {
+      id: this.count,
+      selected: false,
+    };
+  };
+
   createDartboard(): Dartboard {
     const slices = new Map<number, DartboardSlice>();
 
@@ -14,6 +30,7 @@ export class DartboardFactory {
     slices.set(0, {
       segments: [
         {
+          ...this.initSegmentDefaults(),
           value: {
             baseValue: 0,
             multiplier: 1,
@@ -31,6 +48,7 @@ export class DartboardFactory {
       slices.set(i, {
         segments: [
           {
+            ...this.initSegmentDefaults(),
             value: {
               baseValue: i,
               multiplier: 1,
@@ -39,6 +57,7 @@ export class DartboardFactory {
             baseColor: baseColor,
           },
           {
+            ...this.initSegmentDefaults(),
             value: {
               baseValue: i,
               multiplier: 2,
@@ -47,6 +66,7 @@ export class DartboardFactory {
             baseColor: multiplierColor,
           },
           {
+            ...this.initSegmentDefaults(),
             value: {
               baseValue: i,
               multiplier: 3,
@@ -62,6 +82,7 @@ export class DartboardFactory {
     slices.set(25, {
       segments: [
         {
+          ...this.initSegmentDefaults(),
           value: {
             baseValue: 25,
             multiplier: 1,
@@ -70,6 +91,7 @@ export class DartboardFactory {
           baseColor: 'green',
         },
         {
+          ...this.initSegmentDefaults(),
           value: {
             baseValue: 25,
             multiplier: 2,
@@ -80,8 +102,8 @@ export class DartboardFactory {
       ],
     });
 
-    return {
-      slices,
-    };
+    const dartboard: Dartboard = { slices };
+    this.dartboardSegmentManager.registerDartboard(dartboard);
+    return dartboard;
   }
 }

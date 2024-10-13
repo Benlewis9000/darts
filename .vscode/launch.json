@@ -22,7 +22,14 @@
       "pathMapping": {
           "/": "${workspaceRoot}/ClientApp",
           "/base/": "${workspaceRoot}/ClientApp"
-      }
+      },
+      "sourceMapPathOverrides": {
+          "*": "${webRoot}/*",
+          "webpack:///./*": "${webRoot}/*",
+          "webpack:///src/*": "${webRoot}/*",
+          "webpack:///*": "*",
+          "webpack:///./~/*": "${webRoot}/node_modules/*",
+      },
     },
   ]
 }

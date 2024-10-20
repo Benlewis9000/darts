@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { RoundThrow } from '../../model/round';
+import { Round, RoundThrow } from '../../model/round';
 import { DartboardSegment, DartboardValue } from '../../model/dartboard';
 import { Store } from '@ngrx/store';
 import { RoundsState } from './rounds.reducer';
@@ -52,28 +52,7 @@ export class RoundsFacade {
     return this.selectedSegment$.pipe(map((segment) => segment?.value));
   }
 
-  segmentIdForRoundAndThrow$(
-    round: number,
-    roundThrow: RoundThrow
-  ): Observable<number | undefined> {
-    return this.store.select(
-      selectors.selectSelectedSegmentIdForRoundAndThrow(round, roundThrow)
-    );
-  }
-
-  segmentForRoundAndThrow$(round: number, roundThrow: RoundThrow) {
-    return this.segmentIdForRoundAndThrow$(round, roundThrow).pipe(
-      map((id) =>
-        id !== undefined
-          ? this.dartboardSegmentManager.getSegment(id)
-          : undefined
-      )
-    );
-  }
-
-  valueForRoundAndThrow$(round: number, roundThrow: RoundThrow) {
-    return this.segmentForRoundAndThrow$(round, roundThrow).pipe(
-      map((segment) => segment?.value)
-    );
+  get selectRounds$(): Observable<Round[]> {
+    return this.store.select(selectors.selectRounds);
   }
 }

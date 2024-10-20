@@ -35,7 +35,7 @@ describe('RoundsReducer', () => {
       const action = setSelectedSegmentId({ segmentId: 2 });
       const expectedState: RoundsState = {
         ...initialState,
-        selectedSegmentIds: [{ 1: 2 }],
+        rounds: [{ 1: 2 }],
       };
       const state = roundsReducer(initialState, action);
       expect(state).toEqual(expectedState);

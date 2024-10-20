@@ -1,13 +1,7 @@
-import { DartboardValue } from './dartboard';
-
 export type RoundThrow = 1 | 2 | 3;
 
+/** For each incrementing round, store the selected segment ID for each throw. */
 export type Round = {
-  // Store selected segment ID for a throw
+  // [RoundThrow: Segment ID | undefined]
   [K in RoundThrow]?: number | undefined;
 };
-
-// TODO should Round be an interface? It'll require a Map, and then can't be used in the NgRX store, so the bigger question is should Rounds and their associated values be in the NgRX store?
-export interface RoundInterfacePrototype {
-  throws: Map<RoundThrow, DartboardValue>;
-}

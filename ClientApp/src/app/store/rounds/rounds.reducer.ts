@@ -5,13 +5,13 @@ import * as RoundsActions from './rounds.actions';
 export interface RoundsState {
   currentRound: number;
   currentThrow: RoundThrow;
-  selectedSegmentIds: Round[];
+  rounds: Round[];
 }
 
 export const initialState: RoundsState = {
   currentRound: 1,
   currentThrow: 1,
-  selectedSegmentIds: [{}],
+  rounds: [{}],
 };
 
 export const roundsReducer = createReducer(
@@ -33,14 +33,14 @@ export const roundsReducer = createReducer(
   on(
     RoundsActions.setSelectedSegmentId,
     (state, { segmentId }): RoundsState => {
-      const rounds = [...state.selectedSegmentIds];
+      const rounds = [...state.rounds];
       const round = { ...rounds[state.currentRound - 1] };
       round[state.currentThrow] = segmentId;
       rounds[state.currentRound - 1] = round;
 
       return {
         ...state,
-        selectedSegmentIds: rounds,
+        rounds: rounds,
       };
     }
   )

@@ -14,13 +14,10 @@ export const selectCurrentThrow = createSelector(
   (state: RoundsState) => state.currentThrow
 );
 
-export const selectSelectedSegmentIdForRoundAndThrow = (
-  round: number,
-  roundThrow: RoundThrow
-) =>
-  createSelector(selectRoundsState, (state: RoundsState) =>
-    trySelectSegmentId(state, round, roundThrow)
-  );
+export const selectRounds = createSelector(
+  selectRoundsState,
+  (state: RoundsState) => state.rounds
+);
 
 export const selectSelectedSegmentId = createSelector(
   selectRoundsState,
@@ -37,7 +34,7 @@ const trySelectSegmentId = (
   roundThrow: RoundThrow
 ): number | undefined => {
   try {
-    return state.selectedSegmentIds[round - 1][roundThrow];
+    return state.rounds[round - 1][roundThrow];
   } catch {
     return undefined;
   }

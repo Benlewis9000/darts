@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DartboardSlice } from '../../model/dartboard';
+import { DartboardSlice } from '../../../model/dartboard';
 import { DartboardSegmentComponent } from '../dartboard-segment/dartboard-segment.component';
 import { NgClass } from '@angular/common';
 

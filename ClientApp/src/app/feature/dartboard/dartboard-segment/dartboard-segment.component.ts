@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, Input } from '@angular/core';
-import { DartboardSegment } from '../../model/dartboard';
-import { RoundsFacade } from '../../store/rounds/rounds.facade';
+import { DartboardSegment } from '../../../model/dartboard';
+import { RoundsFacade } from '../../../store/rounds/rounds.facade';
 import { NgClass } from '@angular/common';
 import { distinctUntilChanged } from 'rxjs';
 

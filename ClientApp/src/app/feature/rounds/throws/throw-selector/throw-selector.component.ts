@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { RoundsFacade } from '../../../../store/rounds/rounds.facade';
+import { RoundThrow } from '../../../../model/round';
 
 @Component({
   selector: 'app-throw-selector',
@@ -7,5 +9,12 @@ import { Component, Input } from '@angular/core';
   standalone: true,
 })
 export class ThrowSelector {
-  // TODO add inputs for display, callbacks, services (i.e. rounds facade?) to give customisable functionality for selecting a throw
+  @Input({ required: true })
+  targetRound!: RoundThrow;
+
+  constructor(private readonly roundsFacade: RoundsFacade) {}
+
+  goToRoundThrow(roundThrow: RoundThrow) {
+    this.roundsFacade.setCurrentThrow(roundThrow);
+  }
 }

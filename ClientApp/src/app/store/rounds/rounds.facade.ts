@@ -51,4 +51,29 @@ export class RoundsFacade {
   get currentValue$(): Observable<DartboardValue | undefined> {
     return this.selectedSegment$.pipe(map((segment) => segment?.value));
   }
+
+  segmentIdForRoundAndThrow$(
+    round: number,
+    roundThrow: RoundThrow
+  ): Observable<number | undefined> {
+    return this.store.select(
+      selectors.selectSelectedSegmentIdForRoundAndThrow(round, roundThrow)
+    );
+  }
+
+  segmentForRoundAndThrow$(round: number, roundThrow: RoundThrow) {
+    return this.segmentIdForRoundAndThrow$(round, roundThrow).pipe(
+      map((id) =>
+        id !== undefined
+          ? this.dartboardSegmentManager.getSegment(id)
+          : undefined
+      )
+    );
+  }
+
+  valueForRoundAndThrow$(round: number, roundThrow: RoundThrow) {
+    return this.segmentForRoundAndThrow$(round, roundThrow).pipe(
+      map((segment) => segment?.value)
+    );
+  }
 }

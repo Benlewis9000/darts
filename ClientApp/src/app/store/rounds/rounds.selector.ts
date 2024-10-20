@@ -8,26 +8,37 @@ export const selectCurrentRound = createSelector(
   selectRoundsState,
   (state: RoundsState) => state.currentRound
 );
+
 export const selectCurrentThrow = createSelector(
   selectRoundsState,
   (state: RoundsState) => state.currentThrow
 );
+
 export const selectSelectedSegmentIdForRoundAndThrow = (
   round: number,
   roundThrow: RoundThrow
 ) =>
   createSelector(selectRoundsState, (state: RoundsState) =>
-    // TODO how can we reduce this duplicated selection logic?
-    round <= state.selectedSegmentIds.length
-      ? state.selectedSegmentIds[round - 1][roundThrow]
-      : undefined
+    trySelectSegmentId(state, round, roundThrow)
   );
+
 export const selectSelectedSegmentId = createSelector(
   selectRoundsState,
   selectCurrentRound,
   selectCurrentThrow,
-  (state, round, roundThrow) =>
-    round <= state.selectedSegmentIds.length
-      ? state.selectedSegmentIds[round - 1][roundThrow]
-      : undefined
+  (state, round, roundThrow) => trySelectSegmentId(state, round, roundThrow)
 );
+
+// Utils
+
+const trySelectSegmentId = (
+  state: RoundsState,
+  round: number,
+  roundThrow: RoundThrow
+): number | undefined => {
+  try {
+    return state.selectedSegmentIds[round - 1][roundThrow];
+  } catch {
+    return undefined;
+  }
+};

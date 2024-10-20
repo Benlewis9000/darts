@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['throw-score.component.scss'],
   standalone: true,
 })
-export class ThrowScore {}
+export class ThrowScore {
+  // TODO Inputs and hook up to a score for the throw of the given throw
+}
